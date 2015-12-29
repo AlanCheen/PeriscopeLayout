@@ -6,6 +6,35 @@ A layout with animation like Periscope's
 对应的实现文章在这里:[一步一步教你实现Periscope点赞效果
 ](http://www.jianshu.com/p/03fdcfd3ae9c)
 
+## Add dependency
+
+coming soon!
+
+## Usage
+
+1. Step One:
+
+```
+    <me.yifeiyuan.library.PeriscopeLayout
+        android:id="@+id/periscope"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:text="Hello World!"
+        android:background="#d2d2c9"
+        />
+```
+
+2. Step Two:  
+
+```
+        final PeriscopeLayout periscopeLayout = (PeriscopeLayout) findViewById(R.id.periscope);
+        periscopeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                periscopeLayout.addHeart();
+            }
+        });
+```
 
 ## License
 	Copyright (C) 2015, 程序亦非猿
