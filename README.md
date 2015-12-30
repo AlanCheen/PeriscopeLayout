@@ -10,11 +10,25 @@ A layout with animation like Periscope's
 
 ## Add dependency
 
-coming soon!
+### Gradle
+`compile 'me.yifeiyuan.periscopelayout:library:1.0.0'`
+
+### Maven
+```
+<dependency>
+<groupId>me.yifeiyuan</groupId>
+<artifactId>periscopelayout</artifactId>
+<version>library</version>
+<type>xml</type>
+</dependency>
+```
+
+### Eclipse
+呵呵
 
 ## Usage
 
-1. Step One:
+**Step One:**
 
 ```
     <me.yifeiyuan.library.PeriscopeLayout
@@ -26,7 +40,7 @@ coming soon!
         />
 ```
 
-2. Step Two:  
+**Step Two:**
 
 ```
         final PeriscopeLayout periscopeLayout = (PeriscopeLayout) findViewById(R.id.periscope);
