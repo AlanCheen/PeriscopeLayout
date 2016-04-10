@@ -164,7 +164,7 @@ public class PeriscopeLayout extends RelativeLayout {
 
         //这里最好画个图 理解一下 传入了起点 和 终点
         ValueAnimator animator = ValueAnimator.ofObject(evaluator, new PointF((mWidth - dWidth) / 2, mHeight - dHeight), new PointF(random.nextInt(getWidth()), 0));
-        animator.addUpdateListener(new BezierListenr(target));
+        animator.addUpdateListener(new BezierListener(target));
         animator.setTarget(target);
         animator.setDuration(3000);
         return animator;
@@ -184,11 +184,11 @@ public class PeriscopeLayout extends RelativeLayout {
         return pointF;
     }
 
-    private class BezierListenr implements ValueAnimator.AnimatorUpdateListener {
+    private class BezierListener implements ValueAnimator.AnimatorUpdateListener {
 
         private View target;
 
-        public BezierListenr(View target) {
+        public BezierListener(View target) {
             this.target = target;
         }
 
