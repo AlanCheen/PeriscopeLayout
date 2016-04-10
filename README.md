@@ -52,6 +52,10 @@ A layout with animation like Periscope's
         });
 ```
 
+## Contributors
+
+[junyuecao](https://github.com/junyuecao)
+
 ## License
 	Copyright (C) 2015, 程序亦非猿
 	Licensed under the Apache License, Version 2.0 (the "License");
