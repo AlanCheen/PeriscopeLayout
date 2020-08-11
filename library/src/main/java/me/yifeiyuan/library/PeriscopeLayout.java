@@ -36,6 +36,7 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import java.lang.ref.WeakReference;
 import java.util.Random;
 
 
@@ -104,9 +105,7 @@ public class PeriscopeLayout extends RelativeLayout {
         interpolators[1] = acc;
         interpolators[2] = dce;
         interpolators[3] = accdec;
-
     }
-
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -114,7 +113,6 @@ public class PeriscopeLayout extends RelativeLayout {
         mWidth = getMeasuredWidth();
         mHeight = getMeasuredHeight();
     }
-
 
     public void addHeart() {
 
@@ -128,11 +126,10 @@ public class PeriscopeLayout extends RelativeLayout {
         Animator set = getAnimator(imageView);
         set.addListener(new AnimEndListener(imageView));
         set.start();
-
     }
 
     private Animator getAnimator(View target) {
-        AnimatorSet set = getEnterAnimtor(target);
+        AnimatorSet set = getEnterAnimator(target);
 
         ValueAnimator bezierValueAnimator = getBezierValueAnimator(target);
 
@@ -144,7 +141,7 @@ public class PeriscopeLayout extends RelativeLayout {
         return finalSet;
     }
 
-    private AnimatorSet getEnterAnimtor(final View target) {
+    private AnimatorSet getEnterAnimator(final View target) {
 
         ObjectAnimator alpha = ObjectAnimator.ofFloat(target, View.ALPHA, 0.2f, 1f);
         ObjectAnimator scaleX = ObjectAnimator.ofFloat(target, View.SCALE_X, 0.2f, 1f);
@@ -180,20 +177,24 @@ public class PeriscopeLayout extends RelativeLayout {
         PointF pointF = new PointF();
         pointF.x = random.nextInt((mWidth - 100));//减去100 是为了控制 x轴活动范围,看效果 随意~~
         //再Y轴上 为了确保第二个点 在第一个点之上,我把Y分成了上下两半 这样动画效果好一些  也可以用其他方法
-        pointF.y = random.nextInt((mHeight - 100)) / scale;
+        pointF.y = random.nextInt((mHeight - 100)) * 1.0f / scale;
         return pointF;
     }
 
-    private class BezierListener implements ValueAnimator.AnimatorUpdateListener {
+    private static class BezierListener implements ValueAnimator.AnimatorUpdateListener {
 
-        private View target;
+        private WeakReference<View> ref;
 
         public BezierListener(View target) {
-            this.target = target;
+            ref = new WeakReference<>(target);
         }
 
         @Override
         public void onAnimationUpdate(ValueAnimator animation) {
+            View target = ref.get();
+            if (target == null) {
+                return;
+            }
             //这里获取到贝塞尔曲线计算出来的的x y值 赋值给view 这样就能让爱心随着曲线走啦
             PointF pointF = (PointF) animation.getAnimatedValue();
             target.setX(pointF.x);
@@ -203,8 +204,8 @@ public class PeriscopeLayout extends RelativeLayout {
         }
     }
 
-
     private class AnimEndListener extends AnimatorListenerAdapter {
+
         private View target;
 
         public AnimEndListener(View target) {
