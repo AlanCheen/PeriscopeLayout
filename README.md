@@ -11,6 +11,8 @@ A layout with animation like Periscope's
 ## Add dependency
 
 ### Gradle
+`    implementation 'me.yifeiyuan.periscopelayout:PeriscopeLayout:2.0.0'
+`
 `compile 'me.yifeiyuan.periscopelayout:library:1.0.0'`
 
 ### Maven

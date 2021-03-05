@@ -10,8 +10,6 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
-
     }
 
     buildTypes {
@@ -32,12 +30,10 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 }
 
-
-
 apply plugin: "guru.stefma.bintrayrelease"
 
-version = "2.0.0"
-group = "me.yifeiyuan.periscopelayout"
+version = "1.0.1"
+group = "me.yifeiyuan.periscope"
 androidArtifact {
     artifactId = "PeriscopeLayout"
 }
@@ -47,21 +43,4 @@ publish {
     dryRun = false
     desc = 'PeriscopeLayout'
     website = 'https://github.com/AlanCheen/PeriscopeLayout'
-}
-
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
-task javadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-}
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-artifacts {
-    archives javadocJar
-    archives sourcesJar
 }
